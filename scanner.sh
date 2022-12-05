@@ -12,7 +12,11 @@ kill "$pid"
 # Now on to post-processing
 # Using awk to print out the IP address of the reply and the IP-ID of the response
 awk '/reply/ {print $1} /IP/ {print $7,$8}' icmpdump > output
+
+# xargs gets everything on the same line
 xargs -a output -n2 -d'\n' > almost
+# Using awk again to flip the line to IP IP-ID
 awk -F',' '{print $2, $1}' almost > results
+#Sorting so all of the responses are together in the file
 sort results -o results
 echo "Results file created"
