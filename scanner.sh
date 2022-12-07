@@ -3,7 +3,7 @@
 # Start the collection to process output later
 tcpdump -i enp0s3 -n -v 'icmp[icmptype] == icmp-echoreply' | tee icmpdump & pid=$!
 
-zmap --probe-module=icmp_echoscan --bandwidth=10M --max-targets=10 -P 10 -w target_list -f saddr,ipid
+zmap --probe-module=icmp_echoscan --max-targets=10000 -P 10
 sleep 10
 
 # Kills the tcpdump we started earlier so we can process the file it creates
