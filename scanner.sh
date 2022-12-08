@@ -4,6 +4,7 @@
 tcpdump -i enp0s3 -n -v 'icmp[icmptype] == icmp-echoreply' | tee icmpdump & pid=$!
 
 zmap --probe-module=icmp_echoscan --max-targets=10000 -P 10
+echo "Waiting for packets to finish coming in"
 sleep 10
 
 # Kills the tcpdump we started earlier so we can process the file it creates
